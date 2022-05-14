@@ -19,7 +19,14 @@ namespace Business.Concrete
 
         public void Add(Car car)
         {
-            throw new NotImplementedException();
+            if (car.CarName.Length>=2 && car.DailyPrice>0)
+            {
+                _carDal.Add(car);
+            }
+            else
+            {
+                Console.WriteLine("Araba ismi minimum 2 karakter uzunlugunda ve günlük fiyatı 0 dan büyük olmalıdır.");
+            }
         }
 
         public void Delete(Car car)
@@ -34,7 +41,17 @@ namespace Business.Concrete
 
         public List<Car> GetById(int carId)
         {
-            throw new NotImplementedException();
+            return _carDal.GetAll(p => p.CarId == carId);
+        }
+
+        public List<Car> GetCarsByBrandId(int brandId)
+        {
+            return _carDal.GetAll(b => b.BrandId == brandId);
+        }
+
+        public List<Car> GetCarsByColorId(int colorId)
+        {
+            return _carDal.GetAll(c => c.ColorId == colorId);
         }
 
         public void Update(Car car)
